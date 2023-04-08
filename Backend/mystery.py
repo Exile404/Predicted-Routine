@@ -2,12 +2,11 @@ import Backend.Constant as const
 from selenium.webdriver.common.by import By
 from selenium import webdriver
 import os
-from selenium.webdriver.support.ui import Select
 import threading
-
-
+from webdriver_manager.chrome import ChromeDriverManager
+webdriver.Chrome(ChromeDriverManager().install())
 class Routine(webdriver.Chrome):
-    def __init__(self, driver_path=r"F:\Bot", teardown=False):
+    def __init__(self, driver_path=r"../chromedriver.exe", teardown=False):
         self.driver_path = driver_path
         self.teardown = teardown
         os.environ['PATH'] += self.driver_path
@@ -66,7 +65,7 @@ class Routine(webdriver.Chrome):
             for j in i:
                 data.append(j)
 
-        for m in range(5):
+        while len(data)!=0:
             routine = {
                 'Saturday':
                     {
@@ -173,7 +172,7 @@ class Routine(webdriver.Chrome):
             for key, value in routine.items():
                 print(key)
                 print(value)
-            print("------------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
+            print("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
             for i in range(len(deleted)):
                 data.remove(deleted[i])
 
